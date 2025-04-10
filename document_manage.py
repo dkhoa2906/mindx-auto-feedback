@@ -6,9 +6,9 @@ def remove_vietnamese_accents(text):
     nfkd_form = unicodedata.normalize('NFKD', text)
     return ''.join([c for c in nfkd_form if not unicodedata.combining(c)])
 
-def get_template(subject):
+def get_template_path(subject):
     if subject in ["Game Creator - GB", "Scratch Creator - SB"]:
-        return os.path.join("document_templates", "coding-template.docx")
+        return os.path.join("document_templates", "coding.docx")
     if subject in ["Robotics - PRE", "Robotics - ARM"]:
         return os.path.join("document_templates", "robotics.docx")
     if subject in ["Lego 4+"]:
@@ -41,7 +41,7 @@ def create_output_path(student_name, subject, trial_date, file_extension):
     return os.path.join(output_dir, file_name)
 
 def create_from_template(student_name, subject, trial_date):
-    template_path = get_template(subject)
+    template_path = get_template_path(subject)
     output_path = create_output_path(student_name, subject, trial_date, file_extension="docx")
     shutil.copy(template_path, output_path)
     return output_path

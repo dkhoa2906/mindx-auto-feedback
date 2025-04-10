@@ -1,11 +1,8 @@
 from docx import Document
-from docx.enum.text import WD_BREAK
-from docx.oxml import OxmlElement
-from docx.oxml.ns import qn
+
 import os
 
 from docx.shared import Pt
-from docx.styles.style import ParagraphStyle
 
 from document_manage import create_output_path, create_from_template
 
