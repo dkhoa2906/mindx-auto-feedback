@@ -2,7 +2,9 @@ from docx import Document
 import os
 #
 
-doc = Document(os.path.join("document_templates", "coding.docx"))
+# doc = Document(os.path.join("document_templates", "coding.docx"))
+doc = Document(os.path.join("document_templates", "lego.docx"))
+# doc = Document(os.path.join("document_templates", "robotics.docx"))
 
 for i, para in enumerate(doc.paragraphs):
     print(f"\n--- Paragraph {i+1} ---")
