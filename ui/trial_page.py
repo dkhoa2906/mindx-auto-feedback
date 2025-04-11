@@ -13,7 +13,7 @@ def display_trial_page():
 
     ############ CONFIG CHUNG ############
     ############### Begin ################
-    st.set_page_config(layout="wide")
+    st.set_page_config(page_title="MindX Auto Tool", page_icon=":material/hardware:",layout="wide")
     st.markdown("""
         <style>
             .block-container {

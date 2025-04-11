@@ -3,3 +3,12 @@ headless = true
 enableCORS = false
 port = 8080
 enableXsrfProtection = false
+
+[client]
+showErrorDetails = "none"
+[browser]
+gatherUsageStats = false
+serverAddress = "0.0.0.0"
+serverPort = 8501
+# ⬇️ This is the page title shown in the browser tab
+title = "MindX Auto Feedback"
