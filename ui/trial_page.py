@@ -216,6 +216,8 @@ def display_trial_page():
         if st.session_state.feedback:
             st.text_area("Chỉnh sửa nhận xét", value=st.session_state.feedback, height=300, key="final_feedback")
 
+            pdf_needed = st.checkbox("Enable PDF exporting")
+
             if st.button("🫡 Xác nhận"):
                 with st.spinner("🔄 Đang nhập thông tin vào file..."):
                     feedback = st.session_state.final_feedback
@@ -226,14 +228,21 @@ def display_trial_page():
                     st.session_state.docx_path = docx_path
                     st.success("✅ Đã lưu file dưới dạng .DOCX")
 
-                with st.spinner("🔄 Đang xuất file sang .PDF..."):
-                    pdf_path = convert_docx_to_pdf(docx_path, "pdf_output")
-                    st.session_state.pdf_path = pdf_path
+                if pdf_needed:
+                    with st.spinner("🔄 Đang xuất file sang .PDF..."):
+                        pdf_path = convert_docx_to_pdf(docx_path, "pdf_output")
+                        st.session_state.pdf_path = pdf_path
+
                 st.success("✅ Tự động điền hoàn tất! Bấm nút bên dưới để tải xuống.")
 
             col1l, col1m, col1r = st.columns([2, 1, 1])
 
-            if st.session_state.docx_path and st.session_state.pdf_path:
+            if st.session_state.docx_path:
+                with open(st.session_state.docx_path, "rb") as f:
+                    with col1r:
+                        st.download_button("📥 Tải file DOCX", f, file_name=os.path.basename(st.session_state.docx_path))
+
+            elif st.session_state.pdf_path:
                 with open(st.session_state.docx_path, "rb") as f:
                     with col1m:
                         st.download_button("📥 Tải file DOCX", f, file_name=os.path.basename(st.session_state.docx_path))

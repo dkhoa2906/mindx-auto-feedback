@@ -1,0 +1,5 @@
+services:
+  - type: web
+    name: mindx-auto-tool
+    env: docker
+    plan: free
