@@ -10,5 +10,3 @@ showErrorDetails = "none"
 gatherUsageStats = false
 serverAddress = "0.0.0.0"
 serverPort = 8501
-# ⬇️ This is the page title shown in the browser tab
-title = "MindX Auto Feedback"
