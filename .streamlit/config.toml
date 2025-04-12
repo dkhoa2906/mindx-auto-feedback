@@ -6,6 +6,7 @@ enableXsrfProtection = false
 
 [client]
 showErrorDetails = "none"
+
 [browser]
 gatherUsageStats = false
 serverAddress = "0.0.0.0"
