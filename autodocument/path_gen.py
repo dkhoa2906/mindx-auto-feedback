@@ -2,12 +2,14 @@ import os
 import unicodedata
 
 def remove_vietnamese_accents(text):
+    text = text.replace('Đ', 'D').replace('đ', 'd')
     nfkd_form = unicodedata.normalize('NFKD', text)
     return ''.join([c for c in nfkd_form if not unicodedata.combining(c)])
 
+
 def create_output_path(student_name, subject, trial_date, file_extension):
     formatted_date = trial_date.strftime("%d-%m-%Y")
-    safe_student_name = remove_vietnamese_accents(student_name).replace(' ', '_')
+    safe_student_name = remove_vietnamese_accents(student_name).replace(' ', '')
 
     if subject == "Game Creator - GB":
         subject_code = "GB"
@@ -22,7 +24,7 @@ def create_output_path(student_name, subject, trial_date, file_extension):
     else:
         subject_code = subject
 
-    file_name = f"{subject_code}_{safe_student_name}_{formatted_date}.{file_extension}"
+    file_name = f"{subject_code}-{safe_student_name}_{formatted_date}.{file_extension}"
     output_dir = f"{file_extension}_output"
 
     if not os.path.exists(output_dir):

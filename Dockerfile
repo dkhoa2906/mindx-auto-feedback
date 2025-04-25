@@ -19,3 +19,5 @@ EXPOSE 8501
 
 # Start the app
 CMD ["streamlit", "run", "main.py"]
+
+

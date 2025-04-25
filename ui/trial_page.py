@@ -64,7 +64,7 @@ def display_trial_page():
 
         with col1r:
             trial_mentor = st.text_input("Giáo viên hướng dẫn")
-            trial_place = st.selectbox("Cơ sở", ["-", "99 Lê Văn Việt", "Dĩ An", "Nào rảnh thêm mấy cơ sở khác :D"])
+            trial_place = st.selectbox("Cơ sở", ["-", "99 Lê Văn Việt", "Dĩ An", "Nguyễn Duy Trinh", "Nào rảnh thêm mấy cơ sở khác :D"])
             trial_date = st.date_input("Ngày trải nghiệm", value="today", max_value="today", format="DD/MM/YYYY")
             suggested_level = st.selectbox("Cấp độ đề xuất", ["Basic", "Advanced", "Intensive"])
 
@@ -237,12 +237,12 @@ def display_trial_page():
 
             col1l, col1m, col1r = st.columns([2, 1, 1])
 
-            if st.session_state.docx_path:
+            if st.session_state.docx_path and not st.session_state.pdf_path:
                 with open(st.session_state.docx_path, "rb") as f:
                     with col1r:
                         st.download_button("📥 Tải file DOCX", f, file_name=os.path.basename(st.session_state.docx_path))
 
-            elif st.session_state.pdf_path:
+            elif st.session_state.docx_path and st.session_state.pdf_path:
                 with open(st.session_state.docx_path, "rb") as f:
                     with col1m:
                         st.download_button("📥 Tải file DOCX", f, file_name=os.path.basename(st.session_state.docx_path))

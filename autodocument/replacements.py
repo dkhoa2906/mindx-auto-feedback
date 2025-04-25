@@ -4,8 +4,9 @@ from datetime import datetime
 def get_replacements(student_name, student_yob, subject, trial_date, trial_mentor, trial_place, points, feedback):
     replacements = {
         "student_name": student_name,
-        "student_yob": student_yob,
-        "student_grade": str(datetime.now().year - int(student_yob) - 6 + (datetime.now().month >= 8)),
+        "student_yob": student_yob if student_yob else "",
+        "student_grade": (str(datetime.now().year - int(student_yob) - 6 + (datetime.now().month >= 8))) if student_yob else "",
+        "student_age": str(datetime.now().year - int(student_yob)) if student_yob else "",
         "trial_date": trial_date.strftime("%d/%m/%Y"),
         "trial_mentor": trial_mentor,
         "trial_place": trial_place,
@@ -19,7 +20,13 @@ def get_replacements(student_name, student_yob, subject, trial_date, trial_mento
         max_points = 5 if subject in ["Game Creator - GB", "Scratch Creator - SB", "Robotics - KIRO"] else 3
         for col in range(1, max_points + 1):
             placeholder = f"p{row}{col}"
-            replacements[placeholder] = "✅" if col == point else ""
+            if col == point:
+                replacements[placeholder] = "✓"
+            elif subject in ["Robotics - PRE", "Robotics - ARM"]:
+                replacements[placeholder] = "   "
+            else:
+                replacements[placeholder] = ""
+
 
     # Add feedback paragraphs to replacements
     paragraphs = [p.strip() for p in feedback.strip().split("\n\n") if p.strip()]
@@ -39,23 +46,23 @@ def get_replacements(student_name, student_yob, subject, trial_date, trial_mento
 
         # Add types to replacements
         if 4 <= avg_point <= 5:
-            replacements["type_1"] = "✅"
+            replacements["type_1"] = "🗹"
             replacements["type_2"] = replacements["type_3"] = replacements["type_4"] = replacements[
                 "type_5"] = "    "
         elif 3.5 <= avg_point < 4:
-            replacements["type_2"] = "✅"
+            replacements["type_2"] = "🗹"
             replacements["type_1"] = replacements["type_3"] = replacements["type_4"] = replacements[
                 "type_5"] = "    "
         elif 2.5 <= avg_point < 3.5:
-            replacements["type_3"] = "✅"
+            replacements["type_3"] = "🗹"
             replacements["type_1"] = replacements["type_2"] = replacements["type_4"] = replacements[
                 "type_5"] = "    "
         elif 1.5 <= avg_point < 2.5:
-            replacements["type_4"] = "✅"
+            replacements["type_4"] = "🗹"
             replacements["type_1"] = replacements["type_2"] = replacements["type_3"] = replacements[
                 "type_5"] = "    "
         else:
-            replacements["type_5"] = "✅"
+            replacements["type_5"] = "🗹"
             replacements["type_1"] = replacements["type_2"] = replacements["type_3"] = replacements[
                 "type_4"] = "    "
 
@@ -65,14 +72,14 @@ def get_replacements(student_name, student_yob, subject, trial_date, trial_mento
         replacements["avg_point"] = f"{avg_point:.1f}"
 
         if 2 < avg_point <= 3:
-            replacements["p163"] = "✅"
-            replacements["p161"] = replacements["p162"] = ""
+            replacements["p163"] = "✓"
+            replacements["p161"] = replacements["p162"] = "   "
         elif 1.7 <= avg_point <= 2:
-            replacements["p162"] = "✅"
-            replacements["p161"] = replacements["p163"] = ""
+            replacements["p162"] = "✓"
+            replacements["p161"] = replacements["p163"] = "   "
         else:
-            replacements["p161"] = "✅"
-            replacements["p162"] = replacements["p163"] = ""
+            replacements["p161"] = "✓"
+            replacements["p162"] = replacements["p163"] = "   "
 
 
     elif  "Robotics - KIRO":

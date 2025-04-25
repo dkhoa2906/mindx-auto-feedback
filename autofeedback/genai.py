@@ -9,6 +9,7 @@ def generate_feedback(student_name, basic_comment, subject, points, trial_result
     client = genai.Client(api_key=os.environ.get("AI_STUDIO_API_KEY"))
 
     instructions = PROMPTS_BY_SUBJECT.get(subject)
+
     full_prompt = \
     f"""{instructions}
     Tên học viên: {student_name.strip().split()[-1]}
@@ -17,7 +18,8 @@ def generate_feedback(student_name, basic_comment, subject, points, trial_result
     Điểm đánh giá theo thứ tự các tiêu chí: {points}
     Kết quả sau buổi trial: {trial_result}
     Cấp độ đề xuất (bỏ qua nếu kết quả không đạt): {suggested_level}
-    Viết bài nhận xét theo yêu cầu trên.
+    Viết bài nhận xét theo yêu cầu trên. Đừng sử dụng cụm "giáo viên sẽ tạo nhiều thử thách nhỏ" mà
+    hãy tìm cách cải thiện thật sự.
     """
 
     form_config = types.GenerateContentConfig(
