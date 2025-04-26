@@ -5,11 +5,13 @@
 #serverPort = 8501
 
 [server]
+baseUrlPath = "mindx"
 headless = true
 port = 8501
 enableCORS = false
 enableXsrfProtection = false
 address = "0.0.0.0"
+
 
 [client]
 showErrorDetails = "none"
